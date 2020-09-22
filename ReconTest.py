@@ -31,26 +31,20 @@ coord_file = phantom_dir + 'coord.npy'
 # Choose computing device.
 # Device(-1) specifies CPU, while others specify GPUs.
 # GPU requires installing cupy.
-#try:
-#    device = sp.Device(0)
-#except:
-#    device = sp.Device(-1)
-device = sp.Device(-1)
+try:
+    device = sp.Device(0)
+except:
+    device = sp.Device(-1)
 
 xp = device.xp
 device.use()
 
 # Load datasets.
-ksp = xp.load(ksp_file)
 coord = xp.load(coord_file)
+ksp = xp.load(ksp_file)
 
 #mps = mr.app.JsenseRecon(ksp, coord=coord, device=device).run()
 mps = mr.app.JsenseRecon(ksp, device=device).run()
-#%% md
-
-## CG
-
-#%%
 
 cg_app = mr.app.SenseRecon(
     ksp, mps, coord=coord, device=device, lamda=lamda,
