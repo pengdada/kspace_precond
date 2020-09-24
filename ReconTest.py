@@ -18,7 +18,7 @@ except:
 
 #%%
 
-max_iter = 30
+max_iter = 1 #30
 lamda = 0.01
 
 brain_dir='data/brain/'
