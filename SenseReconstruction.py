@@ -39,10 +39,17 @@ device.use()
 ksp = xp.load(ksp_file)
 coord = xp.load(coord_file)
 
+def show_data_info(data, name):
+  print("{}: shape={}, dtype={}".format(name, data.shape, data.dtype))
+
 
 
 dcf = (coord[..., 0]**2 + coord[..., 1]**2)**0.5
 pl.ScatterPlot(coord, dcf, title='Density compensation')
+
+show_data_info(ksp, "ksp")
+show_data_info(coord, "coord")
+show_data_info(dcf, "dcf")
 
 img_grid = sp.nufft_adjoint(ksp * dcf, coord)
 pl.ImagePlot(img_grid, z=0, title='Multi-channel Gridding')
